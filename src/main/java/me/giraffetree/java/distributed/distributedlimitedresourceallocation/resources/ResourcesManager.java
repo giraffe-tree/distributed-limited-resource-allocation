@@ -13,6 +13,7 @@ public class ResourcesManager {
             = new ConcurrentHashMap<>(16);
 
     static {
+        // 默认固定16个资源点
         RESOURCE_CACHE.put("1", new ResourceMetadata("1"));
         RESOURCE_CACHE.put("2", new ResourceMetadata("2"));
         RESOURCE_CACHE.put("3", new ResourceMetadata("3"));

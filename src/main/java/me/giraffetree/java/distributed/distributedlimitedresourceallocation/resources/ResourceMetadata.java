@@ -11,7 +11,7 @@ public class ResourceMetadata {
 
     private String id;
     private String name;
-
+    
     public ResourceMetadata(String id) {
         this.id = id;
         this.name = id;
