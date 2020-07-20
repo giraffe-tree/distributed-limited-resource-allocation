@@ -5,11 +5,14 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.leader.LeaderLatch;
 import org.apache.curator.framework.recipes.leader.LeaderLatchListener;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 /**
  * @author GiraffeTree
  * @date 2020/7/20
  */
-public class GroupCoordinator {
+public class GroupCoordinator implements Closeable {
 
     private final static String DEFAULT_PATH = "/coo";
     private final CuratorFramework curatorFramework;
@@ -28,6 +31,10 @@ public class GroupCoordinator {
     }
 
 
+    @Override
+    public void close() throws IOException {
+        leaderLatch.close();
+    }
 }
 
 @Slf4j

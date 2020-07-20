@@ -32,7 +32,7 @@ public class CoordinatorConfig {
         return client;
     }
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public GroupCoordinator groupCoordinator() {
         GroupCoordinator groupCoordinator = new GroupCoordinator(curatorFramework(), "/coordinator");
         try {
