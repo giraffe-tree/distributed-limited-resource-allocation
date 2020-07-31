@@ -19,6 +19,12 @@
     </properties>
 
     <dependencies>
+        <!-- network io -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.51.Final</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -72,6 +78,8 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.4.1</version>
         </dependency>
+
+
 
     </dependencies>
 
