@@ -2,6 +2,7 @@ package me.giraffetree.java.distributed.distributedlimitedresourceallocation.res
 
 import me.giraffetree.java.distributed.distributedlimitedresourceallocation.members.MemberMetadata;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +12,6 @@ import java.util.Set;
  */
 public interface Assigner {
 
-    Map<MemberMetadata, Set<ResourceMetadata>> assign();
+    Map<MemberMetadata, Set<ResourceMetadata>> assign(List<MemberMetadata> members, List<ResourceMetadata> resourceList);
 
 }

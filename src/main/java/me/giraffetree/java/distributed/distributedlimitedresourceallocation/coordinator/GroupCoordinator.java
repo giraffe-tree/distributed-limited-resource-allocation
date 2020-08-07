@@ -1,5 +1,7 @@
 package me.giraffetree.java.distributed.distributedlimitedresourceallocation.coordinator;
 
+import me.giraffetree.java.distributed.distributedlimitedresourceallocation.resources.Assigner;
+import me.giraffetree.java.distributed.distributedlimitedresourceallocation.resources.DefaultAssigner;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.leader.LeaderLatch;
 
@@ -25,7 +27,8 @@ public class GroupCoordinator implements Closeable {
         this.curatorFramework = curatorFramework;
         this.path = path;
         leaderLatch = new LeaderLatch(curatorFramework, path);
-        leaderLatch.addListener(new LeaderLatchListenerImpl(curatorFramework));
+        Assigner assigner = new DefaultAssigner();
+        leaderLatch.addListener(new LeaderLatchListenerImpl(curatorFramework,assigner));
     }
 
     public void start() throws Exception {

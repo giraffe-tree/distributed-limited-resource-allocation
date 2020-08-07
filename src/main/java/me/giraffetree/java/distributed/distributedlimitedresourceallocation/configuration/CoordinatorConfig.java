@@ -37,7 +37,7 @@ public class CoordinatorConfig {
         return client;
     }
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public MemberRegister memberRegister() {
         return new MemberRegister(curatorFramework(), "node-" + serverPort);
     }

@@ -2,29 +2,33 @@ package me.giraffetree.java.distributed.distributedlimitedresourceallocation.res
 
 import me.giraffetree.java.distributed.distributedlimitedresourceallocation.members.MemberMetadata;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.annotation.concurrent.NotThreadSafe;
+import java.util.*;
 
 /**
  * @author GiraffeTree
  * @date 2020/7/31
  */
+@NotThreadSafe
 public class DefaultAssigner implements Assigner {
 
-    private List<MemberMetadata> members;
-    private List<ResourceMetadata> resourceList;
-
-    public DefaultAssigner(List<MemberMetadata> members, List<ResourceMetadata> resourceList) {
-        this.members = members;
-        this.resourceList = resourceList;
+    public DefaultAssigner() {
     }
 
     @Override
-    public Map<MemberMetadata, Set<ResourceMetadata>> assign() {
-
-
-        return null;
+    public Map<MemberMetadata, Set<ResourceMetadata>> assign(List<MemberMetadata> members, List<ResourceMetadata> resourceList) {
+        int memberSize = members.size();
+        int resourceSize = resourceList.size();
+        HashMap<MemberMetadata, Set<ResourceMetadata>> map = new HashMap<>(memberSize);
+        int index = 0;
+        int initialSize = resourceSize / memberSize + 1;
+        for (ResourceMetadata resourceMetadata : resourceList) {
+            int cur = index++;
+            MemberMetadata memberMetadata = members.get(cur);
+            Set<ResourceMetadata> set = map.computeIfAbsent(memberMetadata, k -> new HashSet<>(initialSize));
+            set.add(resourceMetadata);
+        }
+        return map;
     }
 
 }
